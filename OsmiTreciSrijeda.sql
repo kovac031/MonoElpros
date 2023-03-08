@@ -38,3 +38,12 @@ inner join "Category" c on m."GenreId"=c."Id" --popis filmova i pripadajući ža
 SELECT c."Genre", COUNT(m."Id") FROM Movie m
 inner join Category c on m."GenreId"=c."Id" --koliko svaki žanr ima filmova na listi
 GROUP BY c."Genre"
+
+SELECT * FROM "Movie" m
+left join "Category" c on c."Id"=m."GenreId"
+
+SELECT * FROM "Movie" m
+right join "Category" c on c."Id"=m."GenreId"
+
+SELECT * FROM "Movie" m
+full outer join "Category" c on c."Id"=m."GenreId"
