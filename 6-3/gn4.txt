@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+isti fajl ali drugi tekst
+=======
+neki tekst
+>>>>>>> feature/grana_4_post_release
