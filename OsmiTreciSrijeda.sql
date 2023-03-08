@@ -1,4 +1,4 @@
-CREATE DATABASE OsmiTreciSrijeda
+﻿CREATE DATABASE OsmiTreciSrijeda
 
 CREATE TABLE Category (
 Id uniqueidentifier not null PRIMARY KEY,
@@ -31,3 +31,10 @@ SELECT * FROM Movie;
 
 SELECT * FROM Movie
 where "Release" > '2000';
+
+SELECT m."Title", c."Genre" from "Movie" m
+inner join "Category" c on m."GenreId"=c."Id" --popis filmova i pripadajući žanr
+
+SELECT c."Genre", COUNT(m."Id") FROM Movie m
+inner join Category c on m."GenreId"=c."Id" --koliko svaki žanr ima filmova na listi
+GROUP BY c."Genre"
