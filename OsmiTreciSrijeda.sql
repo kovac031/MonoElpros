@@ -26,3 +26,8 @@ INSERT INTO Movie VALUES
 (newid(), 'Lord of the Rings','2001', (SELECT "Id" FROM "Category" WHERE "Genre"='Fantasy')),
 (newid(), 'Resident Evil','2013', (SELECT "Id" FROM "Category" WHERE "Genre"='Horror')),
 (newid(), 'World War 2','2000', (SELECT "Id" FROM "Category" WHERE "Genre"='Historical'));
+
+SELECT * FROM Movie;
+
+SELECT * FROM Movie
+where "Release" > '2000';
