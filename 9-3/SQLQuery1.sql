@@ -59,3 +59,17 @@ INSERT INTO Movie VALUES
 (newid(), 'Space', NULL, (SELECT dbo.Randv2(rand())), (SELECT "Id" FROM "Category" WHERE "Genre"='Documentary')),
 (newid(), 'Leap Year', NULL, (SELECT dbo.Randv2(rand())), (SELECT "Id" FROM "Category" WHERE "Genre"='Romance'));
 
+SELECT * INTO "BestMovies_temp" from "Movie"
+WHERE "Score" >'5'
+
+SELECT Title, Score FROM BestMovies_temp
+ORDER BY Score DESC
+
+CREATE VIEW "Overview" as (
+SELECT m."Title" as "MovieTitle", m."Release" as "ReleaseYear", c."Genre", m."Score"  
+FROM "Movie" m 
+full outer join "Category" c on c."Id"=m."GenreId")
+
+SELECT * FROM Overview
+ORDER BY Score DESC
+
