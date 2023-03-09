@@ -73,3 +73,8 @@ full outer join "Category" c on c."Id"=m."GenreId")
 SELECT * FROM Overview
 ORDER BY Score DESC
 
+SELECT m."Title" as "MovieTitle", m."Release" as "ReleaseYear", c."Genre", m."Score"  
+FROM "Movie" m 
+full outer join "Category" c on c."Id"=m."GenreId"
+WHERE LEFT((SELECT m."Release"), 1)>=2
+ORDER BY Score DESC
