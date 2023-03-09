@@ -78,23 +78,3 @@ FROM "Movie" m
 full outer join "Category" c on c."Id"=m."GenreId"
 WHERE LEFT((SELECT m."Release"), 1)>=2
 ORDER BY Score DESC
-
-SELECT * INTO "Item_temp"from "Item"
-WHERE "Name" like '%mobi%'
-
-CREATE FUNCTION "SuggestMovie" (@minyear int, @maxyear int) --suggest movie
-returns TABLE 
-AS
-RETURN 
-SELECT "Title","Release" FROM "Movie" WHERE "Release" <=@maxyear AND "Release">=@minyear;
-
-
-select dbo.SuggestMovie (2000, 2016); --ne radi
-
-SELECT * FROM SuggestMovie (2000,2016) --RETURNS --radi
-
-SELECT TOP 1 Title FROM Movie --kopiro
-ORDER BY NEWID()
-
-Select * FROM Movie
-WHERE "Release" <2016 AND "Release">2000
