@@ -80,8 +80,92 @@ ItemId uniqueidentifier not null,
 SingleCost int not null, --jedinični iznos artikla
 Amount int null,
 SumCost int null, --umnožak,ukupno
-SourceId uniqueidentifier null); --može bit trgovina, dobavljač, zaposlenik
+SourceId uniqueidentifier null); --može bit trgovina, dobavljač, zaposlenik; nema tablicu
 
 CREATE TABLE ExpenseItem (
 Id uniqueidentifier not null PRIMARY KEY,
 ExpenseType varchar(50) not null);
+
+ALTER TABLE Ticket
+ADD 
+CONSTRAINT FK_Viewing FOREIGN KEY (ViewingId) REFERENCES Viewing (Id),
+CONSTRAINT FK_Seating FOREIGN KEY (SeatingId) REFERENCES Seating (Id),
+CONSTRAINT FK_Customer FOREIGN KEY (CustomerId) REFERENCES Customer (Id)
+
+ALTER TABLE Viewing
+ADD
+CONSTRAINT FK_Film FOREIGN KEY (FilmId) REFERENCES Film (Id)
+
+ALTER TABLE Seating
+ADD
+CONSTRAINT FK_Viewing2 FOREIGN KEY (ViewingId) REFERENCES Viewing (Id), --ovu vezu dropo
+CONSTRAINT FK_Ticket FOREIGN KEY (TicketId) REFERENCES Ticket (Id)
+
+ALTER TABLE Customer
+ADD
+CONSTRAINT FK_Purchase FOREIGN KEY (PurchaseId) REFERENCES Revenue (Id)
+
+ALTER TABLE Member
+ADD
+CONSTRAINT FK_Customer2 FOREIGN KEY (CustomerId) REFERENCES Customer (Id)
+
+ALTER TABLE MemberHistory
+ADD
+CONSTRAINT FK_Member FOREIGN KEY (MemberId) REFERENCES Member (Id),
+CONSTRAINT FK_Purchase2 FOREIGN KEY (PurchaseId) REFERENCES Revenue (Id)
+
+ALTER TABLE Revenue
+ADD
+CONSTRAINT FK_Item FOREIGN KEY (ItemId) REFERENCES RevenueItem (Id),
+CONSTRAINT FK_Customer3 FOREIGN KEY (CustomerId) REFERENCES Customer (Id)
+
+ALTER TABLE PaycheckRecord
+ADD
+CONSTRAINT FK_Employee FOREIGN KEY (EmployeeId) REFERENCES Employee (Id),
+CONSTRAINT FK_Expense FOREIGN KEY (ExpenseId) REFERENCES Expense (Id)
+
+ALTER TABLE Expense
+ADD
+CONSTRAINT FK_Item2 FOREIGN KEY (ItemId) REFERENCES ExpenseItem (Id)
+
+-- popravljanje veza
+
+ALTER TABLE Seating
+DROP
+CONSTRAINT FK_Viewing2,
+column ViewingId
+
+ALTER TABLE Seating
+DROP
+CONSTRAINT FK_Ticket,
+column TicketId
+
+ALTER TABLE Ticket
+ADD
+PurchaseId uniqueidentifier not null,
+CONSTRAINT FK_Purchase3 FOREIGN KEY (PurchaseId) REFERENCES Revenue (Id)
+
+ALTER TABLE Customer
+DROP
+CONSTRAINT FK_Purchase,
+column PurchaseId
+
+ALTER TABLE Revenue
+DROP
+CONSTRAINT FK_Customer3,
+column CustomerId
+
+ALTER TABLE MemberHistory
+DROP
+CONSTRAINT FK_Purchase2,
+column PurchaseId
+
+ALTER TABLE Revenue
+DROP
+CONSTRAINT FK_Item,
+column ItemId
+
+CREATE TABLE RevenueM2M ( --many to many tablica
+id uniqueidentifier not null PRIMARY KEY,
+RevenueItemId uniqueidentifier not null FOREIGN KEY REFERENCES RevenueItem(Id),
+MemberHistoryId uniqueidentifier not null FOREIGN KEY REFERENCES MemberHistory(Id));
