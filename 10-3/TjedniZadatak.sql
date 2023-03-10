@@ -55,7 +55,33 @@ Amount int not null,
 SumCost int not null, --umnožak,ukupno
 CustomerId uniqueidentifier not null);
 
-CREATE TABLE RevenueItems (
+CREATE TABLE RevenueItem (
 Id uniqueidentifier not null PRIMARY KEY,
 ItemName varchar(50) not null,
 ItemSize varchar(50) null);
+
+CREATE TABLE Employee (
+Id uniqueidentifier not null PRIMARY KEY,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+HomeAddress varchar(50) not null,
+ContactTel varchar(50) null,
+ContactEmail varchar(50) not null);
+
+CREATE TABLE PaycheckRecord (
+Id uniqueidentifier not null PRIMARY KEY,
+EmployeeId uniqueidentifier not null,
+ExpenseId uniqueidentifier not null);
+
+CREATE TABLE Expense (
+Id uniqueidentifier not null PRIMARY KEY,
+ExpenseTime datetime not null,
+ItemId uniqueidentifier not null,
+SingleCost int not null, --jedinični iznos artikla
+Amount int null,
+SumCost int null, --umnožak,ukupno
+SourceId uniqueidentifier null); --može bit trgovina, dobavljač, zaposlenik
+
+CREATE TABLE ExpenseItem (
+Id uniqueidentifier not null PRIMARY KEY,
+ExpenseType varchar(50) not null);
