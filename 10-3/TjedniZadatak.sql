@@ -260,3 +260,31 @@ INSERT INTO RevenueM2M VALUES
 (newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like '35%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like 'C1%'));
 
 --- sve insertano
+
+CREATE VIEW "Record1" as (
+SELECT 
+f."Title" as "MovieTitle", 
+v."StartsAt" as "Time", 
+v."StartsOn" as "Date", 
+s."SeatNb" as "Seat", 
+m."FirstName" as "Name",
+m."LastName" as "Surname"
+FROM "Film" f 
+full outer join "Viewing" v on v."FilmId"=f."Id"
+full outer join "Ticket" t on t."ViewingId"=v."Id"
+full outer join "Seating" s on t."SeatingId"=s."Id"
+full outer join "Customer" c on t."CustomerId"=c."Id"
+full outer join "Member" m on m."CustomerId"=c."Id")
+
+SELECT * FROM Record1
+
+CREATE VIEW "Movie" as (
+SELECT
+f."Title" as "MovieTitle",
+v."StartsAt" as "Time", 
+v."StartsOn" as "Date", 
+f."Duration" 
+FROM "Film" f full outer join "Viewing" v on f."Id"=v."FilmId")
+
+SELECT * FROM Movie
+ORDER BY "Duration" ASC
