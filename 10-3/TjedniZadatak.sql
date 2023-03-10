@@ -169,3 +169,94 @@ CREATE TABLE RevenueM2M ( --many to many tablica
 id uniqueidentifier not null PRIMARY KEY,
 RevenueItemId uniqueidentifier not null FOREIGN KEY REFERENCES RevenueItem(Id),
 MemberHistoryId uniqueidentifier not null FOREIGN KEY REFERENCES MemberHistory(Id));
+
+-- sad je sve povezano
+-- dropat ove rashodovne tablice jer je previše tablica
+
+ALTER TABLE PaycheckRecord
+DROP
+CONSTRAINT FK_Employee, FK_Expense 
+DROP TABLE PaycheckRecord
+
+ALTER TABLE Expense
+DROP
+CONSTRAINT FK_Item2 
+DROP TABLE Expense
+
+DROP TABLE Employee, ExpenseItem
+
+-- vrijeme za insert 
+
+SELECT * FROM viewing
+
+INSERT INTO Ticket VALUES
+(newid(), '2023-02-18 18:53:27', (SELECT "Id" FROM "Viewing" WHERE Id like '4%' ), (SELECT "Id" FROM "Seating" WHERE SeatNb='11'),(SELECT "Id" FROM "Customer" WHERE Id like '9A%'),(SELECT "Id" FROM "Revenue" WHERE SingleCost='140')),
+(newid(), '2023-02-17 17:53:27', (SELECT "Id" FROM "Viewing" WHERE Id like '71%'), (SELECT "Id" FROM "Seating" WHERE SeatNb='12'),(SELECT "Id" FROM "Customer" WHERE Id like '8E%'),(SELECT "Id" FROM "Revenue" WHERE SingleCost='120')),
+(newid(), '2023-02-16 16:53:27', (SELECT "Id" FROM "Viewing" WHERE Id like '2%'), (SELECT "Id" FROM "Seating" WHERE SeatNb='13'),(SELECT "Id" FROM "Customer" WHERE Id like '99%'),(SELECT "Id" FROM "Revenue" WHERE SingleCost='130')),
+(newid(), '2023-02-15 15:53:27', (SELECT "Id" FROM "Viewing" WHERE Id like '73%'), (SELECT "Id" FROM "Seating" WHERE SeatNb='14'),(SELECT "Id" FROM "Customer" WHERE Id like '21%'),(SELECT "Id" FROM "Revenue" WHERE SingleCost='150')),
+(newid(), '2023-02-14 14:53:27', (SELECT "Id" FROM "Viewing" WHERE Id like 'F%'), (SELECT "Id" FROM "Seating" WHERE SeatNb='15'),(SELECT "Id" FROM "Customer" WHERE Id like '43%'),(SELECT "Id" FROM "Revenue" WHERE SingleCost='100'));
+
+INSERT INTO Viewing VALUES
+(newid(), (SELECT "Id" FROM "FIlm" WHERE Title like '%1'), '18:53:27','2023-02-18'),
+(newid(), (SELECT "Id" FROM "FIlm" WHERE Title like '%2'), '17:53:27','2023-02-17'),
+(newid(), (SELECT "Id" FROM "FIlm" WHERE Title like '%3'), '16:53:27','2023-02-16'),
+(newid(), (SELECT "Id" FROM "FIlm" WHERE Title like '%4'), '15:53:27','2023-02-15'),
+(newid(), (SELECT "Id" FROM "FIlm" WHERE Title like '%5'), '14:53:27','2023-02-14');
+
+INSERT INTO Film VALUES
+(newid(), 'film1','1991','zanr1','120'),
+(newid(), 'film2','1991','zanr2','121'),
+(newid(), 'film3','1991','zanr3','122'),
+(newid(), 'film4','1991','zanr4','123'),
+(newid(), 'film5','1991','zanr5','124');
+
+INSERT INTO Seating VALUES
+(newid(),'11',1),
+(newid(),'12',1),
+(newid(),'13',0),
+(newid(),'14',0),
+(newid(),'15',1);
+
+INSERT INTO Customer VALUES
+(newid(),1),
+(newid(),1),
+(newid(),0),
+(newid(),0),
+(newid(),1);
+
+INSERT INTO Member VALUES
+(newid(), (SELECT "Id" FROM "Customer" WHERE Id like '9A%'), 'name1','surname1','address1','phone1','email1'),
+(newid(), (SELECT "Id" FROM "Customer" WHERE Id like '8E%'), 'name2','surname2','address2','phone2','email2'),
+(newid(), (SELECT "Id" FROM "Customer" WHERE Id like '99%'), 'name3','surname3','address3','phone3','email3'),
+(newid(), (SELECT "Id" FROM "Customer" WHERE Id like '21%'), 'name4','surname4','address4','phone4','email4'),
+(newid(), (SELECT "Id" FROM "Customer" WHERE Id like '43%'), 'name5','surname5','address5','phone5','email5');
+
+INSERT INTO MemberHistory VALUES
+(newid(), (SELECT "Id" FROM "Member" WHERE FirstName like '%1')),
+(newid(), (SELECT "Id" FROM "Member" WHERE FirstName like '%2')),
+(newid(), (SELECT "Id" FROM "Member" WHERE FirstName like '%3')),
+(newid(), (SELECT "Id" FROM "Member" WHERE FirstName like '%4')),
+(newid(), (SELECT "Id" FROM "Member" WHERE FirstName like '%5'));
+
+INSERT INTO Revenue VALUES
+(newid(), '2023-02-18 18:53:27', '100','1','100'),
+(newid(), '2023-02-17 17:53:27', '120','2','240'),
+(newid(), '2023-02-16 16:53:27', '130','1','130'),
+(newid(), '2023-02-15 15:53:27', '140','2','280'),
+(newid(), '2023-02-14 14:53:27', '150','3','450');
+
+INSERT INTO RevenueItem VALUES
+(newid(), 'kokice', 'M'),
+(newid(), 'kokice', 'XL'),
+(newid(), 'nachosi', 'M'),
+(newid(), 'nachosi', 'L'),
+(newid(), 'kola', 'M');
+
+INSERT INTO RevenueM2M VALUES
+(newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like '68%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like '71%')),
+(newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like 'BF%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like '41%')),
+(newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like '55%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like '56%')),
+(newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like '85%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like 'E7%')),
+(newid(), (SELECT "Id" FROM "RevenueItem" WHERE Id like '35%'), (SELECT "Id" FROM "MemberHistory" WHERE Id like 'C1%'));
+
+--- sve insertano
