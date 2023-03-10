@@ -16,8 +16,8 @@ CustomerId uniqueidentifier not null,
 RevenueWhen datetime not null,
 Category varchar(50) null,
 Amount int not null,
-SingleItemRev int not null,
-SumItemRev int not null);
+SingleItemRev int not null, --jedinični prihod
+SumItemRev int not null); --jedinični puta količina
 
 CREATE TABLE ShowingRevenue (
 Id uniqueidentifier not null PRIMARY KEY,
