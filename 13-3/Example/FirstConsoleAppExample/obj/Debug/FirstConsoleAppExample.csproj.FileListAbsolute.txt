@@ -1,0 +1,8 @@
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\obj\Debug\FirstConsoleAppExample.csproj.AssemblyReference.cache
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\obj\Debug\FirstConsoleAppExample.csproj.SuggestedBindingRedirects.cache
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\obj\Debug\FirstConsoleAppExample.csproj.CoreCompileInputs.cache
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\bin\Debug\FirstConsoleAppExample.exe.config
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\bin\Debug\FirstConsoleAppExample.exe
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\bin\Debug\FirstConsoleAppExample.pdb
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\obj\Debug\FirstConsoleAppExample.exe
+D:\BEKEND\MonoElpros\13-3\Example\FirstConsoleAppExample\obj\Debug\FirstConsoleAppExample.pdb
